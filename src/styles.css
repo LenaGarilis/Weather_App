@@ -1,0 +1,23 @@
+body {
+  background-color: rgba(18, 18, 18, 0.797);
+  color: white;
+  margin: 0 auto;
+  width: 75%;
+}
+
+.city {
+  text-align: center;
+}
+.weather_icon {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}
+
+#temperature {
+  font-size: 54px;
+}
+#celcius-link,
+#fahrenheit-link {
+  font-size: 20px;
+}
