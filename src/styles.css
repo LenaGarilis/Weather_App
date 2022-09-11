@@ -21,3 +21,6 @@ body {
 #fahrenheit-link {
   font-size: 20px;
 }
+small a {
+  text-decoration: none;
+}
