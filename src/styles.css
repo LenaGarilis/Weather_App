@@ -20,7 +20,13 @@ body {
 #celcius-link,
 #fahrenheit-link {
   font-size: 20px;
+  text-decoration: none;
+  cursor: default;
 }
 small a {
   text-decoration: none;
+}
+
+.units .active {
+  color: white;
 }

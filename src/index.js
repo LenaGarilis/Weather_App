@@ -27,7 +27,7 @@ dateSelector.innerHTML = `${day}, ${date} ${month}, ${hours}:${minutes}`;
 //2.Display the city name and current temperature on the page after the user submits the form (press search)
 let form = document.querySelector("form");
 
-//Function to display weather condition
+//Function to display weather condition of the city the user searches
 const searchCity = (cityInput) => {
   let apikey = "9d0a642f80e2553b5682ef5d7e0c1269";
   let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=metric&appid=${apikey}`;
@@ -49,6 +49,7 @@ let displayWeather = (res) => {
     "src",
     `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
   );
+  //change alt atribute of the img in html
   iconElement.setAttribute("alt", res.data.weather[0].main);
 
   let temperature = document.querySelector("#temperature");
@@ -60,14 +61,19 @@ let displayWeather = (res) => {
 
   let fahrenheit = document.querySelector("#fahrenheit-link");
   let handleFahrTemp = () => {
+    //remove the active class from celcius link and add to fahrenheit
     let tempInFahr = Math.round((tempNum * 9) / 5 + 32);
     temperature.innerHTML = tempInFahr;
+    celcius.classList.remove("active");
+    fahrenheit.classList.add("active");
   };
   fahrenheit.addEventListener("click", handleFahrTemp);
 
   let celcius = document.querySelector("#celcius-link");
   let handleCelTemp = () => {
     temperature.innerHTML = tempNum;
+    fahrenheit.classList.remove("active");
+    celcius.classList.add("active");
   };
   celcius.addEventListener("click", handleCelTemp);
 
