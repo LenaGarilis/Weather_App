@@ -29,7 +29,7 @@ let form = document.querySelector("form");
 
 //Function to display weather condition of the city the user searches
 const searchCity = (cityInput) => {
-  let apikey = "9d0a642f80e2553b5682ef5d7e0c1269";
+  let apikey = "a969311cfcbb4a83dfad2cf7478397f9";
   let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=metric&appid=${apikey}`;
 
   axios.get(apiurl).then(displayWeather);
@@ -106,6 +106,18 @@ let displayWeather = (res) => {
     minute: "2-digit",
   });
   sunset.innerHTML = sunsetTime;
+
+  getForecast(res.data.coord);
+};
+
+// APi call for daily forecast
+//call this function in Display weather func.
+const getForecast = (coords) => {
+  console.log(coords);
+  let apiKey = "a969311cfcbb4a83dfad2cf7478397f9";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
 };
 
 // For displaying weather conditions when user press Search button
@@ -131,3 +143,47 @@ const getTempInCurrentPosition = () => {
 };
 let button = document.querySelector(".current_btn");
 button.addEventListener("click", getTempInCurrentPosition);
+
+//4. Displaying forecast days cards
+const formatDay = (timeStamp) => {
+  let date = new Date(timeStamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+};
+
+const displayForecast = (res) => {
+  let dailyForecast = res.data.daily;
+  console.log(res.data.daily);
+  let forecastCard = document.querySelector("#forecast");
+
+  let forecastHTML = "";
+
+  dailyForecast.forEach((day, index) => {
+    if ((index > 0) & (index < 7)) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col text-center">
+            <div class="px-1 py-3 mb-3 border rounded-2" >
+              <div class="forecast-date">${formatDay(day.dt)}</div>
+              <img src="http://openweathermap.org/img/wn/${
+                day.weather[0].icon
+              }@2x.png" />
+              <div class="weather-forecast-temp">
+                <span class="weather-forecast-temp-max">${`${Math.round(
+                  day.temp.max
+                )}°`}</span>
+                <span class="weather-forecast-temp-min">${`${Math.round(
+                  day.temp.min
+                )}°`}</span>
+              </div>
+            </div>
+          </div>
+    
+    `;
+    }
+  });
+
+  forecastCard.innerHTML = forecastHTML;
+};
+displayForecast();
