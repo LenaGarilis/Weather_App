@@ -1,8 +1,9 @@
 body {
-  background-color: rgba(18, 18, 18, 0.797);
+  background: linear-gradient(to top, #09203f 0%, #537895 100%);
   color: white;
-  margin: 0 auto;
-  width: 75%;
+  margin: 40px auto 20px;
+  width: 50%;
+  height: 100vh;
 }
 
 .city {
@@ -15,11 +16,11 @@ body {
 }
 
 #temperature {
-  font-size: 54px;
+  font-size: 35px;
 }
 #celcius-link,
 #fahrenheit-link {
-  font-size: 20px;
+  font-size: px;
   text-decoration: none;
   cursor: default;
 }
@@ -31,10 +32,18 @@ small a {
   color: white;
 }
 
+.current_btn {
+  color: white;
+  background: rgba(47, 46, 46, 0.797);
+}
+
 .weather-forecast-temp {
   font-size: 13px;
 }
 .weather-forecast-temp-min {
   opacity: 0.5;
   margin-left: 5px;
+}
+a:visited {
+  color: rgba(28, 28, 28, 0.797);
 }
